@@ -15,9 +15,9 @@
 }
 
 .App-header {
-  background-image: url("assets/FondoPokemon.jpg");
+  background-color: dimgray;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
