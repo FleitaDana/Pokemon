@@ -1,38 +1,81 @@
-import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material';
-import React from 'react';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Container, Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 
-const CardPokemon = ({ listPokemon}) => {
+const CardPokemon = (props) => {
+    const [stats, setStats] = useState([]);
+    const [ability, setAbility] = useState([]);
+
+
+    useEffect(() => {
+        setStats(props.pokemonStats)
+    }, [props.pokemonStats])
+
+    useEffect(() => {
+        setAbility(props.pokemonAbilities)
+    }, [props.pokemonAbilities])
+
+    console.log(stats)
     return (
 
-        <Grid item xs={12}>
+        // <Container maxWidth="lg" sx={{ height: '100vh' }}>
 
+        <Grid
+            container
+            direction="column"
+            justifyContent="space-evenly"
+            alignItems="center"
+            xs={12}
+        >
+            <Card sx={{transition: "0.2s", "&:hover": { transform: "scale(1.05)" }, display: 'flex', alignContent: 'center', justifyContent: 'center', boxShadow: 10 }}>
+                <CardActionArea>
 
-                <Card  sx={{ maxWidth: 500, maxHeight: 500, transition: "0.2s", "&:hover": { transform: "scale(1.05)" } }}>
-                    <CardActionArea>
+                    <CardMedia sx={{ height: 330 }}
+                        component="img"
+                        image={props.pokemonImage}
+                        alt="Foto Pokemon"
+                    />
+                    <CardContent sx={{ fontStyle: 'oblique' }}>
 
-                        <CardMedia
-                            component="img"
-                            height="140"
-                            image=".../fondo2"
-                            alt="Foto Pokemon"
-                        />
-                        <CardContent>
+                        <Typography gutterBottom variant="h5" component="div" align='center'>
+                            {props.pokemonName}
+                        </Typography>
 
-                            <Typography gutterBottom variant="h5" component="div">
-                               {listPokemon.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur sit neque delectus praesentium eveniet, debitis adipisci suscipit enim voluptas nesciunt, placeat odio id est nobis numquam, quas omnis sed eligendi!
-                            </Typography>
-                        </CardContent>
+                        <Typography variant="body2" color="text.primary" align='center'>
+                            Peso: {props.pokemonWeight}
+                        </Typography>
 
-                    </CardActionArea>
-                </Card>
+                        <Typography variant="body2" color="text.primary" align='center'>
+                            Altura: {props.pokemonHeight}
+                        </Typography>
 
+                        <Typography variant="body2" color="text.primary" align='center'>
+                            Special-stats:
+                        </Typography>
 
+                        <Typography variant="body2" color="text.primary" align='center'>
+                            {stats?.map((st) => (
+                                <Typography variant="body2" color="text.primary" align='center'>{st.stat.name}:{st.base_stat}</Typography>)
+                            )}
+                        </Typography>
 
+                        <Typography variant="body2" color="text.primary" align='center'>
 
-       </Grid>
+                            Abilities: {ability?.map((ability) =>
+                                <Typography variant="body2" color="text.primary" align='center'>{ability.ability.name}</Typography>)}
+                            <br></br>
+
+                               
+                         {/*    <Typography variant="body2" color="text.primary" align='center'>
+                        Evoluciona de:  {props.pokemonEvolutions}
+                        </Typography> */}
+
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
+
+        </Grid>
+        // </Container >
     )
 }
 

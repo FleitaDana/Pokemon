@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { borderColor } from '@mui/system';
+
+
 
 /* const styles= makeStyles({
     tablaMaterial:{
@@ -9,17 +10,28 @@ import { borderColor } from '@mui/system';
     }
 }) */
 
-const TablePokemon = ({ listPokemon = [] }) => {
+const TablePokemon = ({ listPokemon = []}) => {
 
-    // const classes = styles();
-    return (
+ const [listPoke, setListPoke] = useState() 
 
-         <TableContainer component={Paper}>
-      <Table stickyHeader aria-label="simple table" xs={{borderColor: 'gris'}}>
+   useEffect(() => {
+    setListPoke(listPokemon)
+}, [listPokemon])
+
+  const splitUrl = (url) => {
+    return url.split("/")[6]
+  } 
+
+
+  // const classes = styles();
+  return (
+
+    <TableContainer sx={{ fontStyle: 'oblique' }} component={Paper}>
+      <Table stickyHeader aria-label="simple table" xs={{ borderColor: 'gris' }}>
         <TableHead>
           <TableRow>
-            <TableCell align="center">Name</TableCell>
-            <TableCell align="center">Especificacion</TableCell>
+            <TableCell sx={{ h1: { color: 'black' } }} align="center"><b>Name</b></TableCell>
+            <TableCell align="center"><b>Especification</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -32,16 +44,16 @@ const TablePokemon = ({ listPokemon = [] }) => {
                 {row.name}
               </TableCell>
               <TableCell align="center">
-              <Link to={`/SeeDetails/${row.id}`}> See details</Link>
+                <Link underline="none" to={`/SeeDetails/${row.url.split("/")[6]}`}>See details</Link>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer> 
+    </TableContainer>
 
-        
-);
+
+  );
 
 }
 export default TablePokemon;

@@ -1,40 +1,22 @@
 import React from 'react'
-import BtnCustom from '../components/BtnCustom';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Box, Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import TablePokemon from '../components/TablePokemon';
+import { url } from '../api/baseUrl';
+import { getPokemones } from '../api/apis';
 
 const Home = () => {
 
     const [listPokemon, setListPokemon] = useState([])
-    const [pokemon, setPokemon] = useState([])
-    const url = "https://pokeapi.co/api/v2/pokemon/"
-
-    const Table = async (url) => { //funcion
-
-        const response = await axios.get(url)
-            .then((res) => {
-                console.log(res.data.results)
-                return res.data.results
-
-            })
-            .then((results) => { //nombre y url
-                console.log(results)
-                return Promise.all(results.map((res) => //Promise.all: después de hacer todas las => anteriores
-                    axios.get(res.url))
-                )
-            })
-            .then((results) => {
-                console.log(results)
-                setListPokemon(results.map((res) => res.data)
-                )
-            })
-    }
 
     useEffect(() => {
-        Table(url)
-    }, [url])
+
+        getPokemones()
+            .then((res) => {
+                setListPokemon(res.data.results)
+            })
+
+    }, [])
 
 
     return (
@@ -43,9 +25,19 @@ const Home = () => {
          <BtnCustom label={"mi button"}/>
          </> */
 
-        <Container maxWidth="sm" sx={{ bgcolor: '#b2a', mt: 2}}> 
-           <TablePokemon listPokemon={listPokemon}></TablePokemon> 
-        </Container>
+        //  En xs agregamos los etsilos
+        <div className='fondo-table'>
+            <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+                xs={8}
+            >
+                <TablePokemon listPokemon={listPokemon}></TablePokemon>
+            </Grid>
+        </div>
+
     );
 }
 export default Home;
