@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, CardHeader } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 const CardPokemon = (props) => {
@@ -17,12 +17,12 @@ const CardPokemon = (props) => {
         setAbility(props.pokemonAbilities)
     }, [props.pokemonAbilities])
 
-/*     console.log("EVOLUTIONESassssss")
-    console.log(props.totalEvolutions); */
+    /*     console.log("EVOLUTIONESassssss")
+        console.log(props.totalEvolutions); */
 
-   /*  useEffect(() => {
-        setEvolutions(props.totalEvolutions)
-    }, [props.totalEvolutions]) */
+    /*  useEffect(() => {
+         setEvolutions(props.totalEvolutions)
+     }, [props.totalEvolutions]) */
 
     useEffect(() => {
         setTotalEvolutionsMedia(props.totalEvolutionsMedia)
@@ -31,9 +31,9 @@ const CardPokemon = (props) => {
     useEffect(() => {
         setTotalEvolutionsFinal(props.totalEvolutionsFinal)
     }, [props.totalEvolutionsFinal])
-/* 
-    console.log("EVOLUTIONES CARD")
-    console.log(evolutions); */
+    /* 
+        console.log("EVOLUTIONES CARD")
+        console.log(evolutions); */
 
     return (
 
@@ -54,8 +54,10 @@ const CardPokemon = (props) => {
                 <Card sx={{ transition: "0.2s", "&:hover": { transform: "scale(1.05)" }, display: 'flex', alignContent: 'center', justifyContent: 'center', boxShadow: 10, border: 2 }}>
                     <CardActionArea>
 
-
-                        <CardMedia sx={{ height: 330 }}
+                        <CardHeader sx={{ color: 'grey' }}
+                            title={props.pokemon.id}
+                        />
+                        <CardMedia sx={{ height: 300 }}
                             component="img"
                             image={props.pokemonImage}
                             alt="Foto Pokemon"
@@ -66,43 +68,43 @@ const CardPokemon = (props) => {
                                 {props.pokemonName}
                             </Typography>
 
-                            <Typography variant="body2" color="text.primary" align='center'>
-                                Peso: {props.pokemonWeight}
-                                <br />
-                            </Typography>
-
-                            <Typography variant="body2" color="text.primary" align='center'>
-                                Altura: {props.pokemonHeight}
-                                <br />
-                            </Typography>
-
-                            <Typography variant="body2" color="text.primary" align='center'>
-                                Evoluciona de:   {props.pokemonEvolutionOne}
-                            </Typography>
-
                             <Typography variant="h6" color="text.primary" align='center'>
-                                Evolucion media:
-                                <br />
-                            </Typography>
+                               <span>Peso: <Typography variant="body2">{props.pokemonWeight}</Typography></span>
+                        </Typography>
 
-                            <Typography variant="body2" color="text.primary" align='center'>
-                                {totalEvolutionsMedia?.map(media=> (
-                                    <Typography variant="body2" color="text.primary" align='center'>{media}</Typography>)
-                                )}
-                            </Typography>
 
-                            <Typography variant="h6" color="text.primary" align='center'>
-                                Evolucion Final:
-                                <br />
-                            </Typography>
+                        <Typography variant="body2" color="text.primary" align='center'>
+                            Altura: {props.pokemonHeight}
+                            <br />
+                        </Typography>
 
-                            <Typography variant="body2" color="text.primary" align='center'>
-                                {totalEvolutionsFinal?.map(final=> (
-                                    <Typography variant="body2" color="text.primary" align='center'>{final}</Typography>)
-                                )}
-                            </Typography>
+                        <Typography variant="body2" color="text.primary" align='center'>
+                            Evoluciona de:   {props.pokemonEvolutionOne}
+                        </Typography>
 
-                            {/* <Typography variant="body2" color="text.primary" align='center'>
+                        <Typography variant="h6" color="text.primary" align='center'>
+                            Evolucion media:
+                            <br />
+                        </Typography>
+
+                        <Typography variant="body2" color="text.primary" align='center'>
+                            {totalEvolutionsMedia?.map(media => (
+                                <Typography variant="body2" color="text.primary" align='center'>{media}</Typography>)
+                            )}
+                        </Typography>
+
+                        <Typography variant="h6" color="text.primary" align='center'>
+                            Evolucion Final:
+                            <br />
+                        </Typography>
+
+                        <Typography variant="body2" color="text.primary" align='center'>
+                            {totalEvolutionsFinal?.map(final => (
+                                <Typography variant="body2" color="text.primary" align='center'>{final}</Typography>)
+                            )}
+                        </Typography>
+
+                        {/* <Typography variant="body2" color="text.primary" align='center'>
                                 Evoluciona de:  
                             </Typography>
 
@@ -112,37 +114,33 @@ const CardPokemon = (props) => {
                                 )}
                             </Typography>  */}
 
-                            <Typography variant="h6" color="text.primary" align='center'>
-                                Special-stats:
-                                <br />
-                            </Typography>
+                        <Typography variant="h6" color="text.primary" align='center'>
+                            Special-stats:
+                            <br />
+                        </Typography>
 
-                            <Typography variant="body2" color="text.primary" align='center'>
-                                {stats?.map(st => (
-                                    <Typography variant="body2" color="text.primary" align='center'>{st.stat.name}:{st.base_stat}</Typography>)
-                                )}
-                            </Typography>
+                        <Typography variant="body2" color="text.primary" align='center'>
+                            {stats?.map(st => (
+                                <Typography variant="body2" color="text.primary" align='center'>{st.stat.name}: {st.base_stat}</Typography>)
+                            )}
+                        </Typography>
 
-                            <Typography variant="h6" color="text.primary" align='center'>
-                                Abilities:
-                                <br />
-                            </Typography>
+                        <Typography variant="h6" color="text.primary" align='center'>
+                            Abilities:
+                            <br />
+                        </Typography>
 
-                            <Typography variant="body2" color="text.primary" align='center'>
-                                {ability?.map(ability =>
-                                    <Typography variant="body2" color="text.primary" align='center'>{ability.ability.name}</Typography>)}
-                                <br></br>
+                        <Typography variant="body2" color="text.primary" align='center'>
+                            {ability?.map(ability =>
+                                <Typography variant="body2" color="text.primary" align='center'>{ability.ability.name}</Typography>)}
+                            <br></br>
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
 
-
-
-
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-
-            </Grid>
         </Grid>
+        </Grid >
         // </Container >
     )
 }

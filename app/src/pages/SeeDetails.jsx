@@ -60,10 +60,13 @@ const SeeDetails = () => {
                             })
                     })
                 setLoading(false);
+
+                console.log("RESDATA")
+                console.log(pokemon);
             })
     }
 
-    const check = (evolutionOne, evolutionTwo) => {
+    const check = (evolutionOne, evolutionTwo, evolutionTree) => {
         console.log(evolutionOne) 
         console.log(evolutionTwo) 
         console.log(evolutionTree) 
