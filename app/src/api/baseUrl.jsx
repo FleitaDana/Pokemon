@@ -1,4 +1,4 @@
-// export const url = "https://pokeapi.co/api/v2/pokemon/";
+// export const url = "https://pokeapi.co/api/v2/pokemon/limit=1000";
 
 import axios from "axios";
 

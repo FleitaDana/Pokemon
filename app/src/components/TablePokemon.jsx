@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, } from '@mui/material';
 import { Link } from 'react-router-dom';
-
-
-
 /* const styles= makeStyles({
     tablaMaterial:{
         maxHeight: 500
@@ -18,15 +15,15 @@ const TablePokemon = ({ listPokemon = []}) => {
     setListPoke(listPokemon)
 }, [listPokemon])
 
-  const splitUrl = (url) => {
+  /* const splitUrl = (url) => {
     return url.split("/")[6]
-  } 
-
+  }  */
 
   // const classes = styles();
   return (
 
-    <TableContainer sx={{ fontStyle: 'oblique' }} component={Paper}>
+    <TableContainer sx={{ fontStyle: 'oblique', border:1 }} component={Paper}>
+      <TablePagination rowsPerPageOptions={[10, 20, { value: -1, label: 'All' }]} />
       <Table stickyHeader aria-label="simple table" xs={{ borderColor: 'gris' }}>
         <TableHead>
           <TableRow>

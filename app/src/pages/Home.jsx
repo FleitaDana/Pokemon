@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { Container, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import TablePokemon from '../components/TablePokemon';
-import { url } from '../api/baseUrl';
 import { getPokemones } from '../api/apis';
+import Searcher from '../components/Searcher';
 
 const Home = () => {
 
@@ -18,7 +18,6 @@ const Home = () => {
 
     }, [])
 
-
     return (
         /*  <>
          <BtnCustom label={"mi button"}/>
@@ -32,9 +31,16 @@ const Home = () => {
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
-                xs={8}
+                xs={12} md={12} lg={12}
+                p="20"
             >
+                <Grid item 
+                justifyContent="center" 
+                alignItems="center"
+                xs={12} md={12} lg={12} 
+                sx={{margin: 3}}>
                 <TablePokemon listPokemon={listPokemon}></TablePokemon>
+                </Grid>
             </Grid>
         </div>
 
