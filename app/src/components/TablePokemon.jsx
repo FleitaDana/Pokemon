@@ -1,56 +1,56 @@
 import React, { useEffect, useState } from 'react'
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, } from '@mui/material';
-import { Link } from 'react-router-dom';
-/* const styles= makeStyles({
-    tablaMaterial:{
-        maxHeight: 500
-    }
-}) */
+import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Link} from '@mui/material';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
-const TablePokemon = ({ listPokemon = []}) => {
+const TablePokemon = ({ listPokemon = [] }) => {
 
- const [listPoke, setListPoke] = useState() 
+  const [listPoke, setListPoke] = useState()
 
-   useEffect(() => {
+  useEffect(() => {
     setListPoke(listPokemon)
-}, [listPokemon])
+  }, [listPokemon])
 
-  /* const splitUrl = (url) => {
-    return url.split("/")[6]
-  }  */
-
-  // const classes = styles();
   return (
-
-    <TableContainer sx={{ fontStyle: 'oblique', border:1 }} component={Paper}>
-      <TablePagination rowsPerPageOptions={[10, 20, { value: -1, label: 'All' }]} />
-      <Table stickyHeader aria-label="simple table" xs={{ borderColor: 'gris' }}>
-        <TableHead>
-          <TableRow>
-            <TableCell sx={{ h1: { color: 'black' } }} align="center"><b>Name</b></TableCell>
-            <TableCell align="center"><b>Especification</b></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {listPokemon.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell align="center" component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="center">
-                <Link underline="none" to={`/SeeDetails/${row.url.split("/")[6]}`}>See details</Link>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-
-
+    <Grid
+      container
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      xs={12} md={12} lg={12}
+      p="20"
+    >
+      <Grid item
+        justifyContent="center"
+        alignItems="center"
+        xs={12} md={12} lg={12}
+        sx={{ margin: 3 }}>
+        <TableContainer sx={{ fontStyle: 'oblique', border: 1 , minWidth:500}} component={Paper}>
+          <Table stickyHeader aria-label="simple table" xs={{ borderColor: 'gris' }}>
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ h1: { color: 'black' } }} align="center"><b>Name</b></TableCell>
+                <TableCell align="center"><b>Especification</b></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {listPokemon.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell align="center" component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="center">
+                    <Link underline="none" href={`/SeeDetails/${row.url.split("/")[6]}`}>See details<ArrowOutwardIcon sx={{fontSize: 'small'}}/></Link>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+    </Grid>
   );
-
 }
 export default TablePokemon;

@@ -1,8 +1,10 @@
-import { CircularProgress, Container } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import CardPokemon from '../components/CardPokemon';
 import { getPokemonesById, getSpeciesPokemon, getEvolutions } from '../api/apis';
+import NotFound from '../components/NotFound';
+import Loading from '../components/Loading';
 
 
 const SeeDetails = () => {
@@ -10,7 +12,6 @@ const SeeDetails = () => {
     const paramsId = useParams();
 
     const [pokemon, setPokemon] = useState('');
-    //    const [pokemonName, setPokemonName] = useState();
     const [pokemonImage, setPokemonImage] = useState('');
     const [pokemonAbilities, setPokemonAbilities] = useState([])
     const [pokemonStats, setPokemonStats] = useState([])
@@ -30,7 +31,6 @@ const SeeDetails = () => {
     useEffect(() => {
         console.log("entro")
         data();
-        //check(evolutionOne, evolutionTwo);
     }, [])
 
     const data = () => {
@@ -60,78 +60,96 @@ const SeeDetails = () => {
                             })
                     })
                 setLoading(false);
-
-                console.log("RESDATA")
-                console.log(pokemon);
             })
     }
 
     const check = (evolutionOne, evolutionTwo, evolutionTree) => {
-        console.log(evolutionOne) 
-        console.log(evolutionTwo) 
-        console.log(evolutionTree) 
-        // setTotalEvolutions(evolutionOne);
-        // console.log(totalEvolutions);
+        console.log(evolutionOne)
+        console.log(evolutionTwo)
+        console.log(evolutionTree)
 
+        
         if (Array.isArray(evolutionTwo) && evolutionTwo?.length > 0) {
             // let evolutions = [];
             // evolutions = evolutionTwo?.map((item) => (item))
             // evolutionTwo?.map((item) => evolutions.push(item))
             //  setTotalEvolutions(prevList => prevList.concat(evolutions));
             //  setTotalEvolutions(prevList => ([prevList, evolutionTwo.map((item) => (item))]));
-            setTotalEvolutionsMedia(evolutionTwo.map((item) =>item));
+            setTotalEvolutionsMedia(evolutionTwo.map((item) => item));
 
             console.log(totalEvolutionsMedia);
         }
         else {
             setTotalEvolutionsMedia(prevList => prevList.concat(evolutionTwo));
         }
+        /* 
+                console.log("TERCERA EVO");
+                console.log(evolutionTree); */
 
-
-        console.log("TERCERA EVO");
-        console.log(evolutionTree);
-        
         if (Array.isArray(evolutionTree) && evolutionTree?.length > 0) {
 
-            setTotalEvolutionsFinal(evolutionTree.map((item) =>item));
+            setTotalEvolutionsFinal(evolutionTree.map((item) => item));
 
-            console.log(totalEvolutionsFinal);
+            //console.log(totalEvolutionsFinal);
         }
         else {
             setTotalEvolutionsFinal(prevList => prevList.concat(evolutionTree));
         }
-        console.log(totalEvolutionsFinal);
-   
-        // setListaEvoluciones(prevList => prevList.concat(midList))
-
-        /* if (evolutionTwo.isArray() && evolutionTree.length > 0) {
-            evolutionTree.map((item) => setTotalEvolutions(item))
-        } */
-
+        //console.log(totalEvolutionsFinal);
     }
 
-    if (loading) return <h1>Loading datos <CircularProgress /></h1>
+    if (loading) {
+        return (<Loading/>);
+    } else if (pokemon) {
+        return (<div className='fondo-card'>
+            <CardPokemon
+                pokemon={pokemon}
+                pokemonName={pokemon.name}
+                pokemonImage={pokemonImage}
+                pokemonAbilities={pokemonAbilities}
+                pokemonStats={pokemonStats}
+                pokemonSpecies={pokemonSpecies}
+                pokemonHeight={pokemon.height}
+                pokemonWeight={pokemon.weight}
+                pokemonEvolutionOne={evolutionOne}
+                totalEvolutionsMedia={totalEvolutionsMedia}
+                totalEvolutionsFinal={totalEvolutionsFinal}
+            />
+        </div>)
+    } else {
+        return (<h1>no hay poke <CircularProgress /></h1>);
+    }
 
-    return (
-        <div className='fondo-card'>
-            <Container maxWidth="sm" sx={{ height: '100vh' }}>
-                <CardPokemon
-                    pokemon={pokemon}
-                    pokemonName={pokemon.name}
-                    pokemonImage={pokemonImage}
-                    pokemonAbilities={pokemonAbilities}
-                    pokemonStats={pokemonStats}
-                    pokemonSpecies={pokemonSpecies}
-                    pokemonHeight={pokemon.height}
-                    pokemonWeight={pokemon.weight}
-                    pokemonEvolutionOne={evolutionOne}
-                    totalEvolutionsMedia={totalEvolutionsMedia}
-                    totalEvolutionsFinal={totalEvolutionsFinal}
 
-                />
-            </Container>
-        </div>
-    )
+
+
+    // return (
+
+    //     (loading ?
+
+    //          <h1>Loading datos <CircularProgress /></h1>
+
+    //          : (pokemon ?
+
+    //             <div className='fondo-card'>
+    //                 <CardPokemon
+    //                     pokemon={pokemon}
+    //                     pokemonName={pokemon.name}
+    //                     pokemonImage={pokemonImage}
+    //                     pokemonAbilities={pokemonAbilities}
+    //                     pokemonStats={pokemonStats}
+    //                     pokemonSpecies={pokemonSpecies}
+    //                     pokemonHeight={pokemon.height}
+    //                     pokemonWeight={pokemon.weight}
+    //                     pokemonEvolutionOne={evolutionOne}
+    //                     totalEvolutionsMedia={totalEvolutionsMedia}
+    //                     totalEvolutionsFinal={totalEvolutionsFinal}
+    //                 />
+    //             </div>
+    //             : <NotFound/>
+    //         )
+    //         )
+    // );
 }
 export default SeeDetails;
 
