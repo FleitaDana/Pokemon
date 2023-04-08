@@ -1,9 +1,8 @@
-
 .App {
   text-align: center;
 }
 
-.fondo-main{
+.background-main{
   background-image: url("assets/Pokemon.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -11,13 +10,14 @@
   display: flex;
 }
 
-.fondo-card{
-  background-image: url("assets/forest.jpg");
+.background-card{
+  background-image: url("assets/pokebolas.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
   height: 100%;
   display: flex;
 }
 
-.fondo-table{
-  background: linear-gradient(cadetblue, darkcyan);
+.background-table{
+  background-color: darkslategray;
 }

@@ -1,7 +1,6 @@
 import { Box, Button, Container, createTheme, ThemeProvider, Link} from '@mui/material';
 import React from 'react'
 
-
 const Main = () => {
 
     const theme = createTheme({
@@ -15,9 +14,8 @@ const Main = () => {
         },
     });
 
-
     return (
-        <div className='fondo-main'>
+        <div className='background-main'>
             <Container maxWidth="md" sx={{ mt: 40 }}>
                 <Box
                     alignItems="center"
@@ -30,7 +28,6 @@ const Main = () => {
                     </ThemeProvider>
                 </Box>
             </Container>
-
         </div>
     );
 }

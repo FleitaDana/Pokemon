@@ -1,3 +1,5 @@
+//Componente que no se usa, utilizando fetch
+
 import React from 'react'
 import { useState, useEffect } from 'react';
 
@@ -6,31 +8,26 @@ const PokemonTable = () => {
 
   const url = "https://pokeapi.co/api/v2/pokemon/"
 
-  
-  const getApi = async () => { 
-    const response = await fetch(url);  
+  const getApi = async () => {
+    const response = await fetch(url);
     const data = await response.json();
-    setPersonajes(data.results) 
-    
+    setPersonajes(data.results)
   }
- 
+
   useEffect(() => {
-     getApi()
-     }, []) 
+    getApi()
+  }, [])
 
- 
   const mostrar = personajes.map((personaje, index) =>
-    <div key={personaje.name + index} style={{ margin: "20px" }}>
-      <div style={{ margin: "20px" }}>
+    <div key={personaje.name + index} sx={{ margin: "20px" }}>
+      <div sx={{ margin: "20px" }}>
         <div>{`Nombre: ${personaje.name}`}
-          {/* <img src={personaje.spites} alt={"imagen de personaje"} /> */}
         </div>
-
       </div>
     </div>
   )
   return (
-    <div className='listadoPersonajes'>{mostrar}</div>
+    <div>{mostrar}</div>
   )
 }
 export default PokemonTable;

@@ -9,23 +9,19 @@ const Home = () => {
     const [listPokemon, setListPokemon] = useState([])
 
     useEffect(() => {
-
         getPokemones()
             .then((res) => {
                 setListPokemon(res.data.results)
             })
-
     }, [])
 
     return (
-
-        <div className='fondo-table'>
+        <div className='background-table'>
             <Grid
                 container
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
-                xs={12} md={12} lg={12}
                 p="20"
             > 
                 <Grid item 
@@ -37,7 +33,6 @@ const Home = () => {
                 </Grid>
             </Grid>
         </div>
-
     );
 }
 export default Home;

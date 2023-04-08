@@ -16,7 +16,7 @@ const TablePokemon = ({ listPokemon = [] }) => {
       direction="column"
       justifyContent="center"
       alignItems="center"
-      xs={12} md={12} lg={12}
+      xs={12} 
       p="20"
     >
       <Grid item
@@ -36,13 +36,12 @@ const TablePokemon = ({ listPokemon = [] }) => {
               {listPokemon.map((row) => (
                 <TableRow
                   key={row.name}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 }}}>
                   <TableCell align="center" component="th" scope="row">
                     {row.name}
                   </TableCell>
                   <TableCell align="center">
-                    <Link underline="none" href={`/SeeDetails/${row.url.split("/")[6]}`}>See details<ArrowOutwardIcon sx={{fontSize: 'small'}}/></Link>
+                    <Link underline="none" href={`/SeeDetails/${row.url.split("/")[6]}`}>See details  <ArrowOutwardIcon sx={{fontSize: 'small'}}/></Link>
                   </TableCell>
                 </TableRow>
               ))}
