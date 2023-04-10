@@ -36,6 +36,7 @@ const SeeDetails = () => {
     }, [])
 
     const data = () => {
+        
         setLoading(true)
         getPokemonesById(paramsId.id)
 
@@ -74,7 +75,7 @@ const SeeDetails = () => {
             // console.log(totalEvolutionsMedia);
         }
         else {
-            setTotalEvolutionsMedia(prevList => prevList.concat(evolutionTwo));
+            setTotalEvolutionsMedia(evolutionTwo);
         }
         //console.log("TERCERA EVO");
         // console.log(evolutionTree);
@@ -85,13 +86,14 @@ const SeeDetails = () => {
                 //console.log(totalEvolutionsFinal);
             }
             else {
-                setTotalEvolutionsFinal(prevList => prevList.concat(evolutionTree));
+                setTotalEvolutionsFinal(evolutionTree);
             }
             //console.log(totalEvolutionsFinal);
         } else {
             setTotalEvolutionsFinal(["Does not have"]);
         }
     }
+
     // console.log(totalEvolutionsFinal);
 
     if (loading) {
@@ -135,7 +137,7 @@ const SeeDetails = () => {
                             </Link>
                         </Box>
                     </Box>
-        
+
                     <Box display="flex" direction="column" justifyContent="right" alignItems="right" >
                         <Link underline='none' href='/home'><button><HomeRoundedIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
                         </Link>
@@ -145,7 +147,7 @@ const SeeDetails = () => {
         </div>)
     }
     else {
-        return (<NotFound />);
+        return (<NotFound />); //Aun no funciona este componente
     }
 }
 export default SeeDetails;

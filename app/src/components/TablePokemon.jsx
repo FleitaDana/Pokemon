@@ -4,11 +4,11 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const TablePokemon = ({ listPokemon = [] }) => {
 
-  const [listPoke, setListPoke] = useState()
+  // const [listPoke, setListPoke] = useState()
 
-  useEffect(() => {
-    setListPoke(listPokemon)
-  }, [listPokemon])
+  // useEffect(() => {
+  //   setListPoke(listPokemon)
+  // }, [listPokemon])
 
   return (
     <Grid
@@ -41,7 +41,7 @@ const TablePokemon = ({ listPokemon = [] }) => {
                     {row.name}
                   </TableCell>
                   <TableCell align="center">
-                    <Link underline="none" href={`/SeeDetails/${row.url.split("/")[6]}`}>See details  <ArrowOutwardIcon sx={{fontSize: 'small'}}/></Link>
+                    <Link underline="none" href={`/SeeDetails/${row.url.split("/")[6]}`}>See details <ArrowOutwardIcon sx={{fontSize: 'small'}}/></Link>
                   </TableCell>
                 </TableRow>
               ))}
