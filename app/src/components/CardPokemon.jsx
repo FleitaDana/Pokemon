@@ -1,6 +1,7 @@
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, CardHeader, Link } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import img from '../assets/notFound.png';
 
 const CardPokemon = (props) => {
 
@@ -8,6 +9,7 @@ const CardPokemon = (props) => {
     const [ability, setAbility] = useState([]);
     const [totalEvolutionsMedia, setTotalEvolutionsMedia] = useState([]);
     const [totalEvolutionsFinal, setTotalEvolutionsFinal] = useState([]);
+
 
     useEffect(() => {
         setStats(props.pokemonStats)
@@ -46,9 +48,10 @@ const CardPokemon = (props) => {
                         />
                         <CardMedia sx={{ height: 300 }}
                             component="img"
-                            image={props.pokemonImage || '../assets/pokebolas.jpg'} //hacer funcional
-                            alt="Foto Pokemon"
+                            image={props.pokemonImage || img} 
+                            alt="Foto Pokemon"    
                         />
+
                         <CardContent m='4' sx={{ fontStyle: 'oblique' }}>
 
                             <Typography gutterBottom variant="h4" component="div" align='center'>

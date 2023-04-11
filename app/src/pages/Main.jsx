@@ -6,11 +6,8 @@ const Main = () => {
     const theme = createTheme({
         palette: {
             primary: {
-                main: '#6645vf',
-            },
-            secondary: {
                 main: '#FFFFFF',
-            },
+            },  
         },
     });
 
@@ -21,11 +18,11 @@ const Main = () => {
                     alignItems="center"
                     display="flex"
                     sx={{ width: '100%', height: '500' }}>
-                    <ThemeProvider theme={theme}>
+                    <ThemeProvider theme={theme}> 
                         <Link underline='none' href='/home' >
-                            <Button size="large" color="secondary" variant="contained" sx={{borderRadius: '20px', border:2, fontStyle: 'oblique'}}><b>Meet Pokemon</b></Button>
+                            <Button size="large" color="primary" variant="contained" sx={{borderRadius: '20px', border:2, fontStyle: 'oblique'}}><b>Meet Pokemon</b></Button>
                         </Link>
-                    </ThemeProvider>
+                     </ThemeProvider> 
                 </Box>
             </Container>
         </div>

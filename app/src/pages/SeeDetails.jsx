@@ -31,12 +31,12 @@ const SeeDetails = () => {
     }, [paramsId])
 
     useEffect(() => {
-        // console.log("entro")
-        data();
-    }, [])
+        existe();
+    }, [paramsId])
+
 
     const data = () => {
-        
+
         setLoading(true)
         getPokemonesById(paramsId.id)
 
@@ -46,30 +46,38 @@ const SeeDetails = () => {
                 setPokemonAbilities(res.data.abilities);
                 setPokemonStats(res.data.stats);
                 setPokemonSpecies(res.data.species);
-                getSpeciesPokemon(paramsId.id)
 
+                // if (res.data.evolution_chain?.url === null) { // Verifica si la URL no es null
+
+                getSpeciesPokemon(paramsId.id)
                     .then((res) => {
                         setPokemonEvolutionsId(res.data.evolution_chain.url)
                         const evoId = (res.data.evolution_chain.url).split('/')[6];
 
                         getEvolutions(parseInt(evoId))
-
                             .then((res) => {
                                 setEvolutionOne(res.data.chain.species.name);
                                 setEvolutionTwo(res.data.chain.evolves_to?.map((item) => item.species.name));
                                 setEvolutionTree(res.data.chain.evolves_to?.map((item) => item.evolves_to?.map((item) => item.species.name)));
                                 check(res.data.chain.species.name, res.data.chain.evolves_to?.map((item) => item.species.name), res.data.chain.evolves_to?.map((item) => item.evolves_to?.map((item) => item.species.name)));
-
                             })
-                    })
-                setLoading(false);
+                    });
+                /* } else {
+                    
+                    setPokemonEvolutionsId(null); // Establece el estado de la evolución como null
+                    console.log(pokemonEvolutionsId)
+                } */
             })
+        // .finally(() =>
+        setLoading(false)
+        // ) 
     }
 
     const check = (evolutionOne, evolutionTwo, evolutionTree) => {
         // console.log(evolutionOne)
         // console.log(evolutionTwo)
         // console.log(evolutionTree)
+
         if (Array.isArray(evolutionTwo) && evolutionTwo?.length > 0) {
             setTotalEvolutionsMedia(evolutionTwo.map((item) => item));
             // console.log(totalEvolutionsMedia);
@@ -77,10 +85,8 @@ const SeeDetails = () => {
         else {
             setTotalEvolutionsMedia(evolutionTwo);
         }
-        //console.log("TERCERA EVO");
-        // console.log(evolutionTree);
 
-        if (evolutionTree === 0) {
+        if (evolutionTwo !== null && evolutionTwo !== undefined && evolutionTree === 0) {
             if (Array.isArray(evolutionTree) && evolutionTree?.length > 0) {
                 setTotalEvolutionsFinal(evolutionTree.map((item) => item));
                 //console.log(totalEvolutionsFinal);
@@ -94,7 +100,16 @@ const SeeDetails = () => {
         }
     }
 
-    // console.log(totalEvolutionsFinal);
+    const existe = () => {
+        if (pokemonEvolutionsId === undefined) {
+            setEvolutionOne("Does not have");
+            setTotalEvolutionsMedia(["Does not have"]);
+            setTotalEvolutionsFinal(["Does not have"]);
+        }
+        else {
+            check()
+        }
+    }
 
     if (loading) {
         return (<Loading />);
@@ -115,7 +130,7 @@ const SeeDetails = () => {
 
                     <Box display="flex" direction="column" justifyContent="left" alignItems="left" >
 
-                        <Link underline='none' href={`/SeeDetails/${pokemon.id - 1}`}><button><KeyboardArrowLeftIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
+                        <Link underline='none' href={`/SeeDetails/${pokemon.id === 1 ? 1 : pokemon.id - 1}`}><button><KeyboardArrowLeftIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
                         </Link>
 
                         <CardPokemon

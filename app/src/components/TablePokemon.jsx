@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Link} from '@mui/material';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const TablePokemon = ({ listPokemon = [] }) => {
-
-  // const [listPoke, setListPoke] = useState()
-
-  // useEffect(() => {
-  //   setListPoke(listPokemon)
-  // }, [listPokemon])
 
   return (
     <Grid
