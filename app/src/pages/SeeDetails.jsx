@@ -30,14 +30,15 @@ const SeeDetails = () => {
         data();
     }, [paramsId])
 
-    useEffect(() => {
-        existe();
-    }, [paramsId])
+    // useEffect(() => {
+    //     existe();
+    // }, [paramsId])
 
 
     const data = () => {
 
         setLoading(true)
+
         getPokemonesById(paramsId.id)
 
             .then((res) => {
@@ -47,7 +48,7 @@ const SeeDetails = () => {
                 setPokemonStats(res.data.stats);
                 setPokemonSpecies(res.data.species);
 
-                // if (res.data.evolution_chain?.url === null) { // Verifica si la URL no es null
+                 //if (res.data.evolution_chain?.url === null) { // Verifica si la URL no es null
 
                 getSpeciesPokemon(paramsId.id)
                     .then((res) => {
@@ -62,15 +63,15 @@ const SeeDetails = () => {
                                 check(res.data.chain.species.name, res.data.chain.evolves_to?.map((item) => item.species.name), res.data.chain.evolves_to?.map((item) => item.evolves_to?.map((item) => item.species.name)));
                             })
                     });
-                /* } else {
+                // } else {
                     
-                    setPokemonEvolutionsId(null); // Establece el estado de la evolución como null
-                    console.log(pokemonEvolutionsId)
-                } */
+                //     setPokemonEvolutionsId(null); // Establece el estado de la evolución como null
+                //     console.log(pokemonEvolutionsId)
+                // }
             })
-        // .finally(() =>
+         .finally(() =>
         setLoading(false)
-        // ) 
+        ) 
     }
 
     const check = (evolutionOne, evolutionTwo, evolutionTree) => {
@@ -78,92 +79,101 @@ const SeeDetails = () => {
         // console.log(evolutionTwo)
         // console.log(evolutionTree)
 
-        if (Array.isArray(evolutionTwo) && evolutionTwo?.length > 0) {
-            setTotalEvolutionsMedia(evolutionTwo.map((item) => item));
-            // console.log(totalEvolutionsMedia);
-        }
-        else {
-            setTotalEvolutionsMedia(evolutionTwo);
-        }
-
-        if (evolutionTwo !== null && evolutionTwo !== undefined && evolutionTree === 0) {
-            if (Array.isArray(evolutionTree) && evolutionTree?.length > 0) {
-                setTotalEvolutionsFinal(evolutionTree.map((item) => item));
-                //console.log(totalEvolutionsFinal);
+        //if (evolutionTwo !== null && evolutionTwo !== undefined && evolutionTree === 0) {
+            if (Array.isArray(evolutionTwo) && evolutionTwo?.length > 0) {
+                setTotalEvolutionsMedia(evolutionTwo.map((item) => item));
+                // console.log(totalEvolutionsMedia);
             }
             else {
-                setTotalEvolutionsFinal(evolutionTree);
+                setTotalEvolutionsMedia(evolutionTwo);
             }
-            //console.log(totalEvolutionsFinal);
-        } else {
-            setTotalEvolutionsFinal(["Does not have"]);
-        }
-    }
+        // } else {
+        //     setTotalEvolutionsFinal(["Does not have"]);
+        // }
 
-    const existe = () => {
-        if (pokemonEvolutionsId === undefined) {
-            setEvolutionOne("Does not have");
-            setTotalEvolutionsMedia(["Does not have"]);
-            setTotalEvolutionsFinal(["Does not have"]);
-        }
-        else {
-            check()
-        }
-    }
+        //console.log(totalEvolutionsMedia);
+            // if (evolutionTree !== null && evolutionTree !== undefined && evolutionTree === 0) {
+                if (Array.isArray(evolutionTree) && evolutionTree?.length > 0 ) {
+                    setTotalEvolutionsFinal(evolutionTree.map((item) => item));
+                    console.log("IF")
 
-    if (loading) {
-        return (<Loading />);
-    } else if (pokemon) {
-        return (<div className='background-card'>
-            <Grid
-                container
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-                p="20"
-            >
-                <Grid item
+                    console.log(totalEvolutionsFinal);
+                }
+                else {
+                    setTotalEvolutionsFinal(prevList => prevList.concat(evolutionTree));
+                    console.log("ELSE")
+                console.log(totalEvolutionsFinal);
+                }
+                
+            // } else {
+            //     setTotalEvolutionsFinal(["Does not have"]);
+            // }
+        }
+
+        // const existe = () => {
+        //     if (pokemonEvolutionsId === undefined) {
+        //         setEvolutionOne("Does not have");
+        //         setTotalEvolutionsMedia(["Does not have"]);
+        //         setTotalEvolutionsFinal(["Does not have"]);
+        //     }
+        //     else {
+        //         check()
+        //     }
+        // }
+
+        if (loading) {
+            return (<Loading />);
+        } else if (pokemon) {
+            return (<div className='background-card'>
+                <Grid
+                    container
+                    direction="row"
                     justifyContent="center"
                     alignItems="center"
-                    xs={12} md={12} lg={12}
-                    sx={{ margin: 2 }}>
+                    p="20"
+                >
+                    <Grid item
+                        justifyContent="center"
+                        alignItems="center"
+                        xs={12} md={12} lg={12}
+                        sx={{ margin: 2 }}>
 
-                    <Box display="flex" direction="column" justifyContent="left" alignItems="left" >
+                        <Box display="flex" direction="column" justifyContent="left" alignItems="left" >
 
-                        <Link underline='none' href={`/SeeDetails/${pokemon.id === 1 ? 1 : pokemon.id - 1}`}><button><KeyboardArrowLeftIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
-                        </Link>
+                            <Link underline='none' href={`/SeeDetails/${pokemon.id === 1 ? 1 : pokemon.id - 1}`}><button><KeyboardArrowLeftIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
+                            </Link>
 
-                        <CardPokemon
-                            pokemon={pokemon}
-                            pokemonName={pokemon.name}
-                            pokemonImage={pokemonImage}
-                            pokemonAbilities={pokemonAbilities}
-                            pokemonStats={pokemonStats}
-                            pokemonSpecies={pokemonSpecies}
-                            pokemonHeight={pokemon.height}
-                            pokemonWeight={pokemon.weight}
-                            pokemonEvolutionOne={evolutionOne}
-                            totalEvolutionsMedia={totalEvolutionsMedia}
-                            totalEvolutionsFinal={totalEvolutionsFinal}
-                        />
+                            <CardPokemon
+                                pokemon={pokemon}
+                                pokemonName={pokemon.name}
+                                pokemonImage={pokemonImage}
+                                pokemonAbilities={pokemonAbilities}
+                                pokemonStats={pokemonStats}
+                                pokemonSpecies={pokemonSpecies}
+                                pokemonHeight={pokemon.height}
+                                pokemonWeight={pokemon.weight}
+                                pokemonEvolutionOne={evolutionOne}
+                                totalEvolutionsMedia={totalEvolutionsMedia}
+                                totalEvolutionsFinal={totalEvolutionsFinal}
+                            />
+
+                            <Box display="flex" direction="column" justifyContent="right" alignItems="right" >
+                                <Link underline='none' href={`/SeeDetails/${pokemon.id + 1}`}><button><KeyboardArrowRightIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
+                                </Link>
+                            </Box>
+                        </Box>
 
                         <Box display="flex" direction="column" justifyContent="right" alignItems="right" >
-                            <Link underline='none' href={`/SeeDetails/${pokemon.id + 1}`}><button><KeyboardArrowRightIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
+                            <Link underline='none' href='/home'><button><HomeRoundedIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
                             </Link>
                         </Box>
-                    </Box>
-
-                    <Box display="flex" direction="column" justifyContent="right" alignItems="right" >
-                        <Link underline='none' href='/home'><button><HomeRoundedIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
-                        </Link>
-                    </Box>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </div>)
+            </div>)
+        }
+        else {
+            return (<NotFound />); 
+        }
     }
-    else {
-        return (<NotFound />); //Aun no funciona este componente
-    }
-}
-export default SeeDetails;
+    export default SeeDetails;
 

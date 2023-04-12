@@ -20,11 +20,14 @@ const CardPokemon = (props) => {
     }, [props.pokemonAbilities])
 
     useEffect(() => {
-        setTotalEvolutionsMedia(props.totalEvolutionsMedia)
+        setTotalEvolutionsMedia(props.totalEvolutionsMedia);
+        console.log(props.totalEvolutionsMedia)
+
     }, [props.totalEvolutionsMedia])
 
     useEffect(() => {
-        setTotalEvolutionsFinal(props.totalEvolutionsFinal)
+        setTotalEvolutionsFinal(props.totalEvolutionsFinal);
+        console.log(props.totalEvolutionsFinal)
     }, [props.totalEvolutionsFinal])
 
     return (
@@ -48,8 +51,8 @@ const CardPokemon = (props) => {
                         />
                         <CardMedia sx={{ height: 300 }}
                             component="img"
-                            image={props.pokemonImage || img} 
-                            alt="Foto Pokemon"    
+                            image={props.pokemonImage || img}
+                            alt="Foto Pokemon"
                         />
 
                         <CardContent m='4' sx={{ fontStyle: 'oblique' }}>
@@ -69,34 +72,67 @@ const CardPokemon = (props) => {
 
                             <Typography variant="h6" color="text.primary" align='center'>
                                 Evolves from:
-                                <Link underline='none' href={`/SeeDetails/${props.pokemonEvolutionOne}`}>
-                                    <Typography color="text.primary" variant="body2">{props.pokemonEvolutionOne} <ArrowOutwardIcon sx={{ fontSize: 'small' }} color="primary" /></Typography>
-                                </Link>
                             </Typography>
+
+                            {props.pokemonEvolutionOne.length === 0 ? (
+                                <Typography color="text.primary" variant="body2" align='center'>Does not have</Typography>
+                            ) : (
+                                <Typography variant="h6" color="text.primary" align='center'>
+                                    <Link underline='none' href={`/SeeDetails/${props.pokemonEvolutionOne}`}>
+                                        <Typography color="text.primary" variant="body2">{props.pokemonEvolutionOne} <ArrowOutwardIcon sx={{ fontSize: 'small' }} color="primary" /></Typography>
+                                    </Link>
+                                </Typography>
+                            )}
 
                             <Typography variant="h6" color="text.primary" align='center'>
                                 Middle evolution:
                                 <br />
                             </Typography>
 
-                            <Typography variant="body2" color="text.primary" align='center'>
-                                {totalEvolutionsMedia?.map((media) => (
-                                    <Link underline='none' href={`/SeeDetails/${media}`}>
-                                        <Typography color="text.primary" variant="body2" align='center'>{media}<ArrowOutwardIcon sx={{ fontSize: 'small' }} color="primary" /></Typography>
-                                    </Link>
-                                ))}
-                            </Typography>
+
+                            {totalEvolutionsMedia.length === 0 ? (
+                                <Typography color="text.primary" variant="body2" align='center'>Does not have</Typography>
+                            ) : (
+                                <Typography variant="body2" color="text.primary" align='center'>
+                                    {totalEvolutionsMedia?.map((media) => (
+                                        <Link underline='none' href={`/SeeDetails/${media}`}>
+                                            <Typography color="text.primary" variant="body2" align='center'>{media}<ArrowOutwardIcon sx={{ fontSize: 'small' }} color="primary" /></Typography>
+                                        </Link>
+                                    ))}
+                                </Typography>
+                            )}
 
                             <Typography variant="h6" color="text.primary" align='center'>
                                 Final evolution:
                                 <br />
                             </Typography>
 
-                            <Typography variant="body2" color="text.primary" align='center'>
-                                {totalEvolutionsFinal?.map(final => (
-                                    <Typography variant="body2" color="text.primary" align='center'>{final}</Typography>)
-                                )}
-                            </Typography>
+                            {totalEvolutionsFinal.length === 0 ? (
+                                <Typography color="text.primary" variant="body2" align='center'>Does not have</Typography>
+                            ) : (
+                                <Typography variant="body2" color="text.primary" align='center'>
+                                    {totalEvolutionsFinal?.map(final => (
+                                        <Link underline='none' href={`/SeeDetails/${final}`}>
+                                            <Typography color="text.primary" variant="body2" align='center'>{final}<ArrowOutwardIcon sx={{ fontSize: 'small' }} color="primary" /></Typography>
+                                        </Link>
+                                    ))}
+                                </Typography>
+                            )}
+
+                            {/* 
+                            {props.pokemonEvolutionOne.length === 0 && totalEvolutionsMedia.length === 0 && totalEvolutionsFinal.length === 0? (
+                            <Typography variant="h6" color="text.primary" align='center'>
+                            DOES NOT HAVE EVOLUTIONSSS
+                            <br />
+                        </Typography>):(
+
+                            
+                            <Typography variant="h6" color="text.primary" align='center'>
+                            DOES NOT HAVE EVOLUTIONS
+                            <br />
+                        </Typography>
+                        )} */}
+
 
                             <Typography variant="h6" color="text.primary" align='center'>
                                 Special-stats:

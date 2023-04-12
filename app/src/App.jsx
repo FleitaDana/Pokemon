@@ -1,6 +1,5 @@
 import './App.css';
-import NavBar from './components/NavBar';
-import TablePokemon from './components/TablePokemon.jsx';
+
 
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Home from './pages/Home';
@@ -19,7 +18,6 @@ function App() {
         <Route exact path='/Home' element={<Home />}></Route>
         <Route exact path='/SeeDetails/:id' element={<SeeDetails />}></Route>
         <Route exact path='*' element={<NotFound />}></Route>
-        
       </Routes>
     </Router>
     // </div>
