@@ -95,7 +95,7 @@ const SeeDetails = () => {
         if (Array.isArray(evolutionTree) && evolutionTree?.length > 0) {
             for (let i = 0; i < evolutionTree.length; i++) {
                 if (evolutionTree[i] !== null) {
-                    setTotalEvolutionsFinal(prevList => prevList.concat(evolutionTree[i]));
+                    setTotalEvolutionsFinal((evolutionTree[i]));
                    // setTotalEvolutionsFinal(evolutionTree.map((item) => item));
                 }
                 // console.log("IF")

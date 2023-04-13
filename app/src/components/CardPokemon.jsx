@@ -27,7 +27,7 @@ const CardPokemon = (props) => {
 
     useEffect(() => {
         setTotalEvolutionsFinal(props.totalEvolutionsFinal);
-        console.log("totalEvolutionsFinal de la card", props.totalEvolutionsFinal)
+        //console.log("totalEvolutionsFinal de la card", props.totalEvolutionsFinal)
     }, [props.totalEvolutionsFinal])
 
     return (
