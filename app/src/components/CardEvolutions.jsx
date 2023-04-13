@@ -1,15 +1,15 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, CardHeader, Link } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, CardHeader, Link, Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import img from '../assets/notFound.png';
+import ButtonBack from './ButtonBack';
 
-const CardPokemon = (props) => {
+const CardEvolutions = (props) => {
 
     const [stats, setStats] = useState([]);
     const [ability, setAbility] = useState([]);
     const [totalEvolutionsMedia, setTotalEvolutionsMedia] = useState([]);
     const [totalEvolutionsFinal, setTotalEvolutionsFinal] = useState([]);
-
 
     useEffect(() => {
         setStats(props.pokemonStats)
@@ -21,14 +21,17 @@ const CardPokemon = (props) => {
 
     useEffect(() => {
         setTotalEvolutionsMedia(props.totalEvolutionsMedia);
-        //console.log(props.totalEvolutionsMedia)
+        console.log(props.totalEvolutionsMedia)
 
     }, [props.totalEvolutionsMedia])
 
     useEffect(() => {
         setTotalEvolutionsFinal(props.totalEvolutionsFinal);
-        console.log("totalEvolutionsFinal de la card", props.totalEvolutionsFinal)
+        console.log(props.totalEvolutionsFinal)
     }, [props.totalEvolutionsFinal])
+
+
+
 
     return (
         <Grid
@@ -42,6 +45,13 @@ const CardPokemon = (props) => {
                 alignItems="center"
                 xs={12} md={12} lg={12}
                 sx={{ margin: 3 }}>
+
+                <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" height="100px">
+                    <Typography variant="h6" color="white" align='center'>
+                        Evolution 
+                    </Typography>
+                    <ButtonBack/>
+                </Box>
 
                 <Card sx={{ transition: "0.2s", "&:hover": { transform: "scale(1.05)" }, display: 'flex', alignContent: 'center', justifyContent: 'center', boxShadow: 10, border: 2 }}>
                     <CardActionArea>
@@ -94,7 +104,7 @@ const CardPokemon = (props) => {
                             ) : (
                                 <Typography variant="body2" color="text.primary" align='center'>
                                     {totalEvolutionsMedia?.map((media) => (
-                                        <Link underline='none' href={`/SeeDetails/${media}`}>
+                                        <Link underline='none' href={`/Evolutions/${media}`}>
                                             <Typography color="text.primary" variant="body2" align='center'>{media}<ArrowOutwardIcon sx={{ fontSize: 'small' }} color="primary" /></Typography>
                                         </Link>
                                     ))}
@@ -161,4 +171,4 @@ const CardPokemon = (props) => {
         </Grid >
     )
 }
-export default CardPokemon;
+export default CardEvolutions;
