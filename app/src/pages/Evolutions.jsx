@@ -89,9 +89,9 @@ const Evolutions = () => {
         //console.log(totalEvolutionsMedia);
             // if (evolutionTree !== null && evolutionTree !== undefined && evolutionTree === 0) {
                 if (Array.isArray(evolutionTree) && evolutionTree?.length > 0) {
-                    for (let i = 1; i < evolutionTree.length; i++) {
+                    for (let i = 0; i < evolutionTree.length; i++) {
                         if (evolutionTree[i] !== null) {
-                            setTotalEvolutionsFinal(prevList => prevList.concat(evolutionTree[i]));
+                            setTotalEvolutionsFinal((evolutionTree[i]));
                            // setTotalEvolutionsFinal(evolutionTree.map((item) => item));
                         }
                         // console.log("IF")
@@ -102,7 +102,8 @@ const Evolutions = () => {
                 else {
                     setTotalEvolutionsFinal(prevList => prevList.concat(evolutionTree));
                     console.log("ELSE")
-                console.log(totalEvolutionsFinal);
+                    console.log("totalEvolutionsFinal de la page3EEEEEE")
+                    console.log(totalEvolutionsFinal);
                 }
                 
             // } else {

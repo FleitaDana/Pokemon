@@ -1,4 +1,4 @@
-import { Box, Grid, Link } from '@mui/material';
+import { Box, Grid, Link, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import CardPokemon from '../components/CardPokemon';
@@ -8,6 +8,7 @@ import Loading from '../components/Loading';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import ButtonBack from '../components/ButtonBack';
 
 const SeeDetails = () => {
 
@@ -25,15 +26,18 @@ const SeeDetails = () => {
     const [evolutionTree, setEvolutionTree] = useState([]);
     const [totalEvolutionsMedia, setTotalEvolutionsMedia] = useState([]);
     const [totalEvolutionsFinal, setTotalEvolutionsFinal] = useState([]);
+    const [dataEvolution, setDataEvolution] = useState(false);
+
+   
+
 
     useEffect(() => {
         data();
     }, [paramsId])
 
-    // useEffect(() => {
-    //     existe();
-    // }, [paramsId])
-
+    useEffect(() => {
+        getData();
+    }, [paramsId])
 
     const data = () => {
 
@@ -96,7 +100,7 @@ const SeeDetails = () => {
             for (let i = 0; i < evolutionTree.length; i++) {
                 if (evolutionTree[i] !== null) {
                     setTotalEvolutionsFinal((evolutionTree[i]));
-                   // setTotalEvolutionsFinal(evolutionTree.map((item) => item));
+                    // setTotalEvolutionsFinal(evolutionTree.map((item) => item));
                 }
                 // console.log("IF")
                 // console.log("totalEvolutionsFinal de la page")
@@ -105,17 +109,15 @@ const SeeDetails = () => {
         }
         else {
             setTotalEvolutionsFinal(prevList => prevList.concat(evolutionTree));
-            console.log("ELSE")
-            console.log("totalEvolutionsFinal de la page3EEEEEE")
             console.log(totalEvolutionsFinal);
         }
 
-        console.log("DATO QUE MANDO AL COMPONNETE")
-        console.log(totalEvolutionsFinal);
+
         // } else {
         //     setTotalEvolutionsFinal(["Does not have"]);
         // }
     }
+
 
     // const existe = () => {
     //     if (pokemonEvolutionsId === undefined) {
@@ -127,6 +129,16 @@ const SeeDetails = () => {
     //         check()
     //     }
     // }
+
+    const getData = () => {
+        localStorage.getItem('evoMedia');
+        console.log("ESTOY EN GET DATA")
+        console.log(localStorage.getItem('evoMedia'))
+        setDataEvolution(localStorage.getItem('evoMedia'));
+        console.log("DATA EVOLUTION", dataEvolution)
+        
+    }
+    console.log("DATA EVOLUTIO2", dataEvolution)
 
     if (loading) {
         return (<Loading />);
@@ -147,9 +159,21 @@ const SeeDetails = () => {
 
                     <Box display="flex" direction="column" justifyContent="left" alignItems="left" >
 
+                        {dataEvolution == null ?
+                        (
                         <Link underline='none' href={`/SeeDetails/${pokemon.id === 1 ? 1 : pokemon.id - 1}`}><button><KeyboardArrowLeftIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
-                        </Link>
-                        {console.log("precard", totalEvolutionsFinal)}
+                        </Link>)
+                         : (
+                            <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" height="100px">
+                         <ButtonBack></ButtonBack>
+                         </Box>
+                         )}
+
+                        {/* <Link underline='none' href={`/SeeDetails/${pokemon.id === 1 ? 1 : pokemon.id - 1}`}><button><KeyboardArrowLeftIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
+                        </Link> */}
+
+
+
                         <CardPokemon
                             pokemon={pokemon}
                             pokemonName={pokemon.name}
@@ -164,16 +188,28 @@ const SeeDetails = () => {
                             totalEvolutionsFinal={totalEvolutionsFinal}
                         />
 
+                       
+
+                        {dataEvolution == null ?
                         <Box display="flex" direction="column" justifyContent="right" alignItems="right" >
-                            <Link underline='none' href={`/SeeDetails/${pokemon.id + 1}`}><button><KeyboardArrowRightIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
-                            </Link>
-                        </Box>
+                        <Link underline='none' href={`/SeeDetails/${pokemon.id + 1}`}><button><KeyboardArrowRightIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
+                        </Link>
+                    </Box>
+                         : (
+                            ''
+                            )}
                     </Box>
 
-                    <Box display="flex" direction="column" justifyContent="right" alignItems="right" >
+                    
+
+                    {dataEvolution == null ?
+                        <Box display="flex" direction="column" justifyContent="right" alignItems="right" >
                         <Link underline='none' href='/home'><button><HomeRoundedIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
                         </Link>
                     </Box>
+                         : (
+                            ''
+                            )}
                 </Grid>
             </Grid>
         </div>)
@@ -181,6 +217,7 @@ const SeeDetails = () => {
     else {
         return (<NotFound />);
     }
+
 }
 export default SeeDetails;
 

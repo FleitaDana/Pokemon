@@ -67,7 +67,7 @@ const TablePokemon = ({ listPokemon = [] }) => {
                       {row.name}
                     </TableCell>
                     <TableCell align="center">
-                      <Link underline="none" href={`/SeeDetails/${row.url.split("/")[6]}`}>See details <ArrowOutwardIcon sx={{ fontSize: 'small' }} /></Link>
+                      <Link underline="none" color="secondary" href={`/SeeDetails/${row.url.split("/")[6]}`}>See details <ArrowOutwardIcon sx={{ fontSize: 'small' }} /></Link>
                     </TableCell>
                   </TableRow>
                 ))}

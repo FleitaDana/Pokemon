@@ -89,7 +89,7 @@ const CardEvolutions = (props) => {
                             ) : (
                                 <Typography variant="h6" color="text.primary" align='center'>
                                     <Link underline='none' href={`/SeeDetails/${props.pokemonEvolutionOne}`}>
-                                        <Typography color="text.primary" variant="body2">{props.pokemonEvolutionOne} <ArrowOutwardIcon sx={{ fontSize: 'small' }} color="primary" /></Typography>
+                                        <Typography color="text.primary" variant="body2">{props.pokemonEvolutionOne} <ArrowOutwardIcon sx={{ fontSize: 'small' }} color="secondary" /></Typography>
                                     </Link>
                                 </Typography>
                             )}
@@ -105,7 +105,7 @@ const CardEvolutions = (props) => {
                                 <Typography variant="body2" color="text.primary" align='center'>
                                     {totalEvolutionsMedia?.map((media) => (
                                         <Link underline='none' href={`/Evolutions/${media}`}>
-                                            <Typography color="text.primary" variant="body2" align='center'>{media}<ArrowOutwardIcon sx={{ fontSize: 'small' }} color="primary" /></Typography>
+                                            <Typography color="text.primary" variant="body2" align='center'>{media} <ArrowOutwardIcon sx={{ fontSize: 'small' }} color="secondary" /></Typography>
                                         </Link>
                                     ))}
                                 </Typography>
@@ -122,7 +122,7 @@ const CardEvolutions = (props) => {
                                 <Typography variant="body2" color="text.primary" align='center'>
                                     {totalEvolutionsFinal?.map(final => (
                                         <Link underline='none' href={`/Evolutions/${final}`}>
-                                            <Typography color="text.primary" variant="body2" align='center'>{final}<ArrowOutwardIcon sx={{ fontSize: 'small' }} color="primary" /></Typography>
+                                            <Typography color="text.primary" variant="body2" align='center'>{final}<ArrowOutwardIcon sx={{ fontSize: 'small' }} color="secondary" /></Typography>
                                         </Link>
                                     ))}
                                 </Typography>

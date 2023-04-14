@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, CardHeader, Link } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, CardHeader, Link, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import img from '../assets/notFound.png';
@@ -9,6 +9,24 @@ const CardPokemon = (props) => {
     const [ability, setAbility] = useState([]);
     const [totalEvolutionsMedia, setTotalEvolutionsMedia] = useState([]);
     const [totalEvolutionsFinal, setTotalEvolutionsFinal] = useState([]);
+    const [savedData, setSavedData] = useState(false);
+    const evo = true;
+  
+    // function saveData (event) {
+    //  console.log("ESTOY EN SAVE DATA")
+    // localStorage.setItem('evoMedia', true)
+    // console.log("ESTOY EN SAVE DATA")
+    // console.log(localStorage.setItem('evoMedia'))
+    // }
+    
+
+    function click (){
+        console.log("HICE CLCIK");
+        localStorage.setItem('evoMedia', evo)
+        console.log( localStorage.setItem('evoMedia', evo));
+        setSavedData(true);
+    }
+
 
 
     useEffect(() => {
@@ -78,8 +96,8 @@ const CardPokemon = (props) => {
                                 <Typography color="text.primary" variant="body2" align='center'>Does not have</Typography>
                             ) : (
                                 <Typography variant="h6" color="text.primary" align='center'>
-                                    <Link underline='none' href={`/SeeDetails/${props.pokemonEvolutionOne}`}>
-                                        <Typography color="text.primary" variant="body2">{props.pokemonEvolutionOne} <ArrowOutwardIcon sx={{ fontSize: 'small' }} color="primary" /></Typography>
+                                    <Link onClick={click}  underline='none' href={`/SeeDetails/${props.pokemonEvolutionOne}`}>
+                                        <Typography color="text.primary" variant="body2">{props.pokemonEvolutionOne} <ArrowOutwardIcon sx={{ fontSize: 'small' }} color="secondary"/></Typography>
                                     </Link>
                                 </Typography>
                             )}
@@ -94,11 +112,12 @@ const CardPokemon = (props) => {
                             ) : (
                                 <Typography variant="body2" color="text.primary" align='center'>
                                     {totalEvolutionsMedia?.map((media) => (
-                                        <Link underline='none' href={`/SeeDetails/${media}`}>
-                                            <Typography color="text.primary" variant="body2" align='center'>{media}<ArrowOutwardIcon sx={{ fontSize: 'small' }} color="primary" /></Typography>
+                                        <Link onClick={click} underline='none' href={`/SeeDetails/${media}`} >     
+                                            <Typography color="text.primary" variant="body2" align='center'>{media}<ArrowOutwardIcon sx={{ fontSize: 'small' }} color="secondary" /></Typography>
                                         </Link>
                                     ))}
                                 </Typography>
+                                
                             )}
 
                             <Typography variant="h6" color="text.primary" align='center'>
@@ -111,8 +130,8 @@ const CardPokemon = (props) => {
                             ) : (
                                 <Typography variant="body2" color="text.primary" align='center'>
                                     {totalEvolutionsFinal?.map(final => (
-                                        <Link underline='none' href={`/Evolutions/${final}`}>
-                                            <Typography color="text.primary" variant="body2" align='center'>{final}<ArrowOutwardIcon sx={{ fontSize: 'small' }} color="primary" /></Typography>
+                                        <Link onClick={click} underline='none' href={`/SeeDetails/${final}`}>
+                                            <Typography color="text.primary" variant="body2" align='center'>{final}<ArrowOutwardIcon sx={{ fontSize: 'small' }} color="secondary" /></Typography>
                                         </Link>
                                     ))}
                                 </Typography>
