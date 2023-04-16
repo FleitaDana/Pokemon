@@ -12,7 +12,7 @@ const Main = () => {
                     sx={{ width: '100%', height: '500' }}>
                     <ThemeProvider> 
                         <Link underline='none' href='/home' >
-                            <Button size="large" color="primary" variant="contained" sx={{borderRadius: '20px', border:2, fontStyle: 'oblique'}}><b>Meet Pokemon</b></Button>
+                            <Button size="large" color="primary" variant="contained" sx={{borderRadius: '10px', border:2, fontStyle: 'oblique'}}><b>Meet Pokemon</b></Button>
                         </Link>
                      </ThemeProvider> 
                 </Box>

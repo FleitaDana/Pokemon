@@ -9,7 +9,7 @@ const CardPokemon = (props) => {
     const [ability, setAbility] = useState([]);
     const [totalEvolutionsMedia, setTotalEvolutionsMedia] = useState([]);
     const [totalEvolutionsFinal, setTotalEvolutionsFinal] = useState([]);
-    const [savedData, setSavedData] = useState(false);
+
     const evo = true;
   
     // function saveData (event) {
@@ -21,10 +21,9 @@ const CardPokemon = (props) => {
     
 
     function click (){
-        console.log("HICE CLCIK");
         localStorage.setItem('evoMedia', evo)
         console.log( localStorage.setItem('evoMedia', evo));
-        setSavedData(true);
+  
     }
 
 

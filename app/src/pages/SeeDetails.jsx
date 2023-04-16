@@ -132,13 +132,12 @@ const SeeDetails = () => {
 
     const getData = () => {
         localStorage.getItem('evoMedia');
-        console.log("ESTOY EN GET DATA")
-        console.log(localStorage.getItem('evoMedia'))
+        // console.log("ESTOY EN GET DATA")
+        // console.log(localStorage.getItem('evoMedia'))
         setDataEvolution(localStorage.getItem('evoMedia'));
-        console.log("DATA EVOLUTION", dataEvolution)
-        
+        //console.log("DATA EVOLUTION", dataEvolution)
     }
-    console.log("DATA EVOLUTIO2", dataEvolution)
+
 
     if (loading) {
         return (<Loading />);
@@ -171,8 +170,6 @@ const SeeDetails = () => {
 
                         {/* <Link underline='none' href={`/SeeDetails/${pokemon.id === 1 ? 1 : pokemon.id - 1}`}><button><KeyboardArrowLeftIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
                         </Link> */}
-
-
 
                         <CardPokemon
                             pokemon={pokemon}
