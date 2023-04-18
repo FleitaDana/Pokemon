@@ -1,4 +1,4 @@
-import { Box, Button, Grid, ThemeProvider } from '@mui/material';
+import { Button, Grid, ThemeProvider } from '@mui/material';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import ReplyIcon from '@mui/icons-material/Reply';
@@ -9,6 +9,7 @@ function ButtonBack() {
 		navigate(-1);
 		localStorage.clear();
 	}
+	
 	return <>
 		<Grid
 			container

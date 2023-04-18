@@ -1,6 +1,6 @@
 import baseURL from "./baseUrl";
 
-const getPokemones = () => baseURL.get("/pokemon?limit=1000")
+const getPokemones = (page) => baseURL.get(`/pokemon/?offset=${(page-1)*20}&limit=20`)
 const getPokemonesById = (id) => baseURL.get(`/pokemon/${id}`)
 const getPokemonesByName = (name) => baseURL.get(`/pokemon/${name}`)
 const getSpeciesPokemon = (id) => baseURL.get(`/pokemon-species/${id}`)
@@ -11,5 +11,5 @@ export{
     getPokemonesById,
     getPokemonesByName,
     getSpeciesPokemon,
-    getEvolutions
+    getEvolutions,
 }

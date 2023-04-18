@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, CardHeader, Link, Button } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, CardHeader, Link } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import img from '../assets/notFound.png';
@@ -11,22 +11,18 @@ const CardPokemon = (props) => {
     const [totalEvolutionsFinal, setTotalEvolutionsFinal] = useState([]);
 
     const evo = true;
-  
+
     // function saveData (event) {
     //  console.log("ESTOY EN SAVE DATA")
     // localStorage.setItem('evoMedia', true)
     // console.log("ESTOY EN SAVE DATA")
     // console.log(localStorage.setItem('evoMedia'))
     // }
-    
 
-    function click (){
+
+    function click() {
         localStorage.setItem('evoMedia', evo)
-        console.log( localStorage.setItem('evoMedia', evo));
-  
     }
-
-
 
     useEffect(() => {
         setStats(props.pokemonStats)
@@ -88,21 +84,21 @@ const CardPokemon = (props) => {
                             </Typography>
 
                             <Typography variant="h6" color="text.primary" align='center'>
-                                Evolves from:
+                                Base evolution:
                             </Typography>
 
                             {props.pokemonEvolutionOne.length === 0 ? (
                                 <Typography color="text.primary" variant="body2" align='center'>Does not have</Typography>
                             ) : (
                                 <Typography variant="h6" color="text.primary" align='center'>
-                                    <Link onClick={click}  underline='none' href={`/SeeDetails/${props.pokemonEvolutionOne}`}>
-                                        <Typography color="text.primary" variant="body2">{props.pokemonEvolutionOne} <ArrowOutwardIcon sx={{ fontSize: 'small' }} color="secondary"/></Typography>
+                                    <Link onClick={click} underline='none' href={`/SeeDetails/${props.pokemonEvolutionOne}`}>
+                                        <Typography color="text.primary" variant="body2">{props.pokemonEvolutionOne} <ArrowOutwardIcon sx={{ fontSize: 'small' }} color="secondary" /></Typography>
                                     </Link>
                                 </Typography>
                             )}
 
                             <Typography variant="h6" color="text.primary" align='center'>
-                                Middle evolution:
+                                First evolution:
                                 <br />
                             </Typography>
 
@@ -111,16 +107,15 @@ const CardPokemon = (props) => {
                             ) : (
                                 <Typography variant="body2" color="text.primary" align='center'>
                                     {totalEvolutionsMedia?.map((media) => (
-                                        <Link onClick={click} underline='none' href={`/SeeDetails/${media}`} >     
+                                        <Link onClick={click} underline='none' href={`/SeeDetails/${media}`} >
                                             <Typography color="text.primary" variant="body2" align='center'>{media}<ArrowOutwardIcon sx={{ fontSize: 'small' }} color="secondary" /></Typography>
                                         </Link>
                                     ))}
                                 </Typography>
-                                
                             )}
 
                             <Typography variant="h6" color="text.primary" align='center'>
-                                Final evolution:
+                                Second evolution:
                                 <br />
                             </Typography>
 

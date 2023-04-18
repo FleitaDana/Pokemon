@@ -26,10 +26,7 @@ const SeeDetails = () => {
     const [evolutionTree, setEvolutionTree] = useState([]);
     const [totalEvolutionsMedia, setTotalEvolutionsMedia] = useState([]);
     const [totalEvolutionsFinal, setTotalEvolutionsFinal] = useState([]);
-    const [dataEvolution, setDataEvolution] = useState(false);
-
-   
-
+    const [dataEvolution, setDataEvolution] = useState('');
 
     useEffect(() => {
         data();
@@ -78,9 +75,6 @@ const SeeDetails = () => {
     }
 
     const check = (evolutionOne, evolutionTwo, evolutionTree) => {
-        // console.log(evolutionOne)
-        // console.log(evolutionTwo)
-        // console.log(evolutionTree)
 
         //if (evolutionTwo !== null && evolutionTwo !== undefined && evolutionTree === 0) {
         if (Array.isArray(evolutionTwo) && evolutionTwo?.length > 0) {
@@ -102,22 +96,13 @@ const SeeDetails = () => {
                     setTotalEvolutionsFinal((evolutionTree[i]));
                     // setTotalEvolutionsFinal(evolutionTree.map((item) => item));
                 }
-                // console.log("IF")
-                // console.log("totalEvolutionsFinal de la page")
-                // console.log(totalEvolutionsFinal);
             }
         }
         else {
             setTotalEvolutionsFinal(prevList => prevList.concat(evolutionTree));
             console.log(totalEvolutionsFinal);
         }
-
-
-        // } else {
-        //     setTotalEvolutionsFinal(["Does not have"]);
-        // }
     }
-
 
     // const existe = () => {
     //     if (pokemonEvolutionsId === undefined) {
@@ -138,6 +123,7 @@ const SeeDetails = () => {
         //console.log("DATA EVOLUTION", dataEvolution)
     }
 
+    console.log(dataEvolution)
 
     if (loading) {
         return (<Loading />);
@@ -168,9 +154,6 @@ const SeeDetails = () => {
                          </Box>
                          )}
 
-                        {/* <Link underline='none' href={`/SeeDetails/${pokemon.id === 1 ? 1 : pokemon.id - 1}`}><button><KeyboardArrowLeftIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
-                        </Link> */}
-
                         <CardPokemon
                             pokemon={pokemon}
                             pokemonName={pokemon.name}
@@ -185,8 +168,6 @@ const SeeDetails = () => {
                             totalEvolutionsFinal={totalEvolutionsFinal}
                         />
 
-                       
-
                         {dataEvolution == null ?
                         <Box display="flex" direction="column" justifyContent="right" alignItems="right" >
                         <Link underline='none' href={`/SeeDetails/${pokemon.id + 1}`}><button><KeyboardArrowRightIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
@@ -196,8 +177,6 @@ const SeeDetails = () => {
                             ''
                             )}
                     </Box>
-
-                    
 
                     {dataEvolution == null ?
                         <Box display="flex" direction="column" justifyContent="right" alignItems="right" >
