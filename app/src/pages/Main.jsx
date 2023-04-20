@@ -1,5 +1,6 @@
-import { Box, Button, Container, ThemeProvider, Link} from '@mui/material';
+import { Box, Button, Container, Link } from '@mui/material';
 import React from 'react'
+import theme from '../assets/Theme'
 
 const Main = () => {
 
@@ -9,12 +10,17 @@ const Main = () => {
                 <Box
                     alignItems="center"
                     display="flex"
-                    sx={{ width: '100%', height: '500' }}>
-                    <ThemeProvider> 
-                        <Link underline='none' href='/home' >
-                            <Button size="large" color="primary" variant="contained" sx={{borderRadius: '10px', border:2, fontStyle: 'oblique'}}><b>Meet Pokemon</b></Button>
-                        </Link>
-                     </ThemeProvider> 
+                    sx={{
+                        width: '100%', height: '500',
+                        [theme.breakpoints.down('lg')]: {
+                        justifyContent: 'center'
+                        },
+                    }}>
+
+                    <Link underline='none' href='/home' >
+                        <Button size="large" color="primary" variant="contained" sx={{ borderRadius: '10px', border: 2, fontStyle: 'oblique' }}><b>Meet Pokemon</b></Button>
+                    </Link>
+
                 </Box>
             </Container>
         </div>

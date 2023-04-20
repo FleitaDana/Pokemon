@@ -9,6 +9,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import ButtonBack from '../components/ButtonBack';
+import theme from '../assets/Theme';
 
 const SeeDetails = () => {
 
@@ -96,6 +97,7 @@ const SeeDetails = () => {
                     setTotalEvolutionsFinal((evolutionTree[i]));
                     // setTotalEvolutionsFinal(evolutionTree.map((item) => item));
                 }
+
             }
         }
         else {
@@ -131,10 +133,12 @@ const SeeDetails = () => {
         return (<div className='background-card'>
             <Grid
                 container
-                direction="row"
+                flexDirection="row"
                 justifyContent="center"
                 alignItems="center"
                 p="20"
+                sx={{[theme.breakpoints.down('sm')]:{flexDirection:'column', justifyContent:'center' ,alignItems:'center'},
+            }}
             >
                 <Grid item
                     justifyContent="center"
@@ -142,14 +146,21 @@ const SeeDetails = () => {
                     xs={12} md={12} lg={12}
                     sx={{ margin: 2 }}>
 
-                    <Box display="flex" direction="column" justifyContent="left" alignItems="left" >
+                    <Box display="flex" flexDirection="column" justifyContent="left" alignItems="left" padding={0} >
 
                         {dataEvolution == null ?
                         (
+                        <Box display="flex" flexDirection="row" justifyContent="space-between">
                         <Link underline='none' href={`/SeeDetails/${pokemon.id === 1 ? 1 : pokemon.id - 1}`}><button><KeyboardArrowLeftIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
-                        </Link>)
+                        </Link>
+                        <Link underline='none' href={`/SeeDetails/${pokemon.id + 1}`}><button><KeyboardArrowRightIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
+                        </Link>
+                        </Box>
+                        )
                          : (
-                            <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" height="100px">
+                            <Box display="flex" flexDirection="column"  height="100px" position="fixed" top="20px" left="20px"
+                            sx={{[theme.breakpoints.down('sm')]:{position: 'static', flexDirection:'column', justifyContent:'center' ,alignItems:'center'},
+            }}>
                          <ButtonBack></ButtonBack>
                          </Box>
                          )}
@@ -168,14 +179,7 @@ const SeeDetails = () => {
                             totalEvolutionsFinal={totalEvolutionsFinal}
                         />
 
-                        {dataEvolution == null ?
-                        <Box display="flex" direction="column" justifyContent="right" alignItems="right" >
-                        <Link underline='none' href={`/SeeDetails/${pokemon.id + 1}`}><button><KeyboardArrowRightIcon sx={{ fontSize: 'large', width: '20px', height: '20px' }} /></button>
-                        </Link>
-                    </Box>
-                         : (
-                            ''
-                            )}
+                        
                     </Box>
 
                     {dataEvolution == null ?
